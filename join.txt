@@ -1,0 +1,49 @@
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    department_id INT
+);
+
+CREATE TABLE Departments (
+    department_id INT PRIMARY KEY,
+    department_name VARCHAR(50)
+);
+
+INSERT INTO Students VALUES
+(1, 'Priya', 101),
+(2, 'Ravi', 102),
+(3, 'Anu', 103),
+(4, 'Kumar', NULL);
+
+INSERT INTO Departments VALUES
+(101, 'CSE'),
+(102, 'ECE'),
+(104, 'IT');
+
+SELECT * FROM Students;
+
+SELECT * FROM Departments;
+
+SELECT Students.student_name,
+       Departments.department_name
+FROM Students
+INNER JOIN Departments
+ON Students.department_id = Departments.department_id;
+
+SELECT Students.student_name,
+       Departments.department_name
+FROM Students
+LEFT JOIN Departments
+ON Students.department_id = Departments.department_id;
+
+SELECT Students.student_name,
+       Departments.department_name
+FROM Students
+RIGHT JOIN Departments
+ON Students.department_id = Departments.department_id;
+
+SELECT Students.student_name,
+       Departments.department_name
+FROM Students
+FULL OUTER JOIN Departments
+ON Students.department_id = Departments.department_id;

@@ -1,0 +1,65 @@
+CREATE TABLE Studentss (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    department VARCHAR(30),
+    marks INT
+);
+
+CREATE TABLE Employeess (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    salary INT,
+    department VARCHAR(30)
+);
+select * from Studentss
+select * from Employeess
+
+INSERT INTO Studentss VALUES
+(1, 'Priya', 'CSE', 90),
+(2, 'Ravi', 'ECE', 75),
+(3, 'Anu', 'CSE', 85),
+(4, 'Kumar', 'IT', 60);
+
+INSERT INTO Employeess VALUES
+(101, 'Arun', 30000, 'CSE'),
+(102, 'Bala', 25000, 'ECE'),
+(103, 'Divya', 40000, 'CSE'),
+(104, 'Mani', 20000, 'IT');
+
+SELECT *
+FROM Students
+WHERE marks > (
+    SELECT AVG(marks)
+    FROM Students
+);
+
+CREATE TABLE HighMarks (
+    id INT,
+    name VARCHAR(50),
+    marks INT
+);
+
+INSERT INTO HighMarks (id, name, marks)
+SELECT id, name, marks
+FROM Students
+WHERE marks > (
+    SELECT AVG(marks)
+    FROM Students
+);
+
+UPDATE Employees
+SET salary = salary + 5000
+WHERE department IN (
+    SELECT department
+    FROM Students
+    WHERE marks >= 85
+);
+
+DELETE FROM Students
+WHERE marks < (
+    SELECT AVG(marks)
+    FROM (
+        SELECT marks
+        FROM Students
+    ) AS temp
+);
